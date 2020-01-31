@@ -10,7 +10,7 @@ public final class Perk implements Serializable{
 	
 	private static final long serialVersionUID = 778436289048909543L;
 	
-	private String name,desc;
+	public String name,desc;
 	private int tier;
 	public Perk(String name,String desc,int tier) {
 		this.name=name;

@@ -1,24 +1,20 @@
 package atributes;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Vector;
 
 public abstract class Attributes_init {
 	private static final File perks_dir=new File("Perks");
-	private static final File file=new File("src/atributes/ATTRIBUTES");
 	private static final Vector <String> basic_perks_names= new Vector <String>();
 	private static final Vector <String> basic_perks_desc= new Vector <String>();
 	private static final Vector <Integer> basic_perks_tiers= new Vector <Integer>();
 	public static Vector <Perk> perks=new Vector <Perk>();
 	
 	public static void init() {
-		basic_perks_init();
 		create_dirs();
 		load_perks();
 	}
@@ -27,6 +23,7 @@ public abstract class Attributes_init {
 	private synchronized static void create_dirs() {
 		if(!perks_dir.exists()) {
 			perks_dir.mkdir();
+			basic_perks_init();
 			perks_creation();
 		}
 	}
@@ -71,6 +68,8 @@ public abstract class Attributes_init {
 		basic_perks_names.add("Student");
 		basic_perks_desc.add("Everything can be learned if you put your mind to it. Gain additional 20% experience from battle. At the eleventh character level, you gain an additional perk point upon and this perk becomes inert.");
 		basic_perks_tiers.add(1);
+		
+		
 	}
 	/*
 	 * basic_perks_names.add("");
@@ -85,6 +84,7 @@ public abstract class Attributes_init {
 				fi = new FileInputStream(file);
 				ObjectInputStream oi = new ObjectInputStream(fi);
 				perks.add((Perk) oi.readObject());
+				System.out.println(perks.lastElement().name);
 				fi.close();
 				oi.close();
 			} catch (FileNotFoundException e) {
