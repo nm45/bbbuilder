@@ -11,17 +11,20 @@ public final class Perk implements Serializable{
 	private static final long serialVersionUID = 778436289048909543L;
 	
 	private String name,desc;
-	public Perk(String name,String desc) {
+	private int tier;
+	public Perk(String name,String desc,int tier) {
 		this.name=name;
 		this.desc=desc;
+		this.tier=tier;
 	}
-	protected void save_perk() throws IOException {
-		File f=new File("/perks/"+name+".perk");
+	public void save_perk() throws IOException {
+		File f=new File("Perks/"+name+".perk");
+		
 		if(f.exists()) {
 			System.err.println("ERROR CODE: 444");
 			return;
 		}
-		FileOutputStream fout = new FileOutputStream("/perks/"+name+".perk");
+		FileOutputStream fout = new FileOutputStream("Perks/"+name+".perk");
 	    ObjectOutputStream oos = new ObjectOutputStream(fout);
 		oos.writeObject(this);
 		oos.close();
